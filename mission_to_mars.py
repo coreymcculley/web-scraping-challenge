@@ -4,7 +4,7 @@ import pandas as pd
 
 def init_browser():
     executable_path = {"executable_path": "/usr/local/bin/chromedriver"}
-    return Browser("chrome", **executable_path, headless=False)
+    return Browser("chrome")
 
 def scrape():
     browser = init_browser()
@@ -49,7 +49,7 @@ def scrape():
         url=image_urls[x]
         browser.visit(url)
         soup = BeautifulSoup(browser.html, 'html.parser')
-        img_url = soup.find_all('a', target='_blank')[0]['href']
+        img_url = soup.find_all('a', target='_blank')[4]['href']
         img_title = soup.find('h2', class_='title').text
         dict_hemi = {'title': img_title, 'img_url': img_url}
         mission['hemisphere_image_urls'].append(dict_hemi)
